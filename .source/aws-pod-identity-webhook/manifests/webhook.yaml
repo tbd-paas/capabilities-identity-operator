@@ -1,0 +1,40 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: aws-pod-identity-webhook
+  namespace: tbd-identity-system # +operator-builder:field:name=namespace,default="tbd-identity-system",type=string
+  annotations:
+    # +operator-builder:field:name=namespace,type=string,replace="identity-namespace"
+    cert-manager.io/inject-ca-from: identity-namespace/aws-pod-identity-webhook
+  labels:
+    app: aws-pod-identity-webhook
+    app.kubernetes.io/name: aws-pod-identity-webhook
+    app.kubernetes.io/instance: aws-pod-identity-webhook
+    app.kubernetes.io/component: aws-pod-identity-webhook
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/version: v0.5.3
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: identity-operator
+webhooks:
+  - name: pod-identity-webhook.amazonaws.com
+    failurePolicy: Ignore
+    clientConfig:
+      service:
+        name: aws-pod-identity-webhook
+        namespace: tbd-identity-system # +operator-builder:field:name=namespace,default="tbd-identity-system",type=string
+        path: /mutate
+    rules:
+      - operations:
+          - CREATE
+        apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        resources:
+          - pods
+    sideEffects: None
+    admissionReviewVersions:
+      - v1beta1

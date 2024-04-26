@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  # +operator-builder:field:name=namespace,type=string,description=`
+  # Namespace to use where underlying identity capability will be deployed.`
+  name: tbd-identity-system
+  labels:
+    certificates.capabilities.platform.tbd.io/inject-ca-bundle: "true"

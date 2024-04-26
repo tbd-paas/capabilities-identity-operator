@@ -1,0 +1,27 @@
+# permissions for end users to view identitycapabilities.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: identitycapability-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/part-of: capabilities-identity-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: identitycapability-viewer-role
+rules:
+- apiGroups:
+  - capabilities.platform.tbd.io
+  resources:
+  - identitycapabilities
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - capabilities.platform.tbd.io
+  resources:
+  - identitycapabilities/status
+  verbs:
+  - get

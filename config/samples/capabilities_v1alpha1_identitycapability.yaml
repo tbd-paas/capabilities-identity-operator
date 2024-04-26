@@ -1,0 +1,6 @@
+apiVersion: capabilities.platform.tbd.io/v1alpha1
+kind: IdentityCapability
+metadata:
+  name: identitycapability-sample
+spec:
+  namespace: "tbd-identity-system"

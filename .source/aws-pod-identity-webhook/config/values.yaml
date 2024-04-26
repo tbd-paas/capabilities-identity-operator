@@ -1,0 +1,5 @@
+---
+defaultNamespace: tbd-identity-system
+projectVersion: v0.5.3
+operatorVersion: v0.0.1
+platformVersion: unstable

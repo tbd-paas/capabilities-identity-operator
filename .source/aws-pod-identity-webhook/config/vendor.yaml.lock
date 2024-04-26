@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'feat: add trust manager pod identity webhook (#24)...'
+      sha: cb9f6872ce80036c951ea28bbdd93da6f55b799a
+      tags:
+      - v0.2.0
+    path: .
+  path: aws-pod-identity-webhook/vendor
+kind: LockConfig

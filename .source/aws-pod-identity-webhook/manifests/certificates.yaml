@@ -1,0 +1,30 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: aws-pod-identity-webhook
+  namespace: tbd-identity-system # +operator-builder:field:name=namespace,default="tbd-identity-system",type=string
+  labels:
+    app: aws-pod-identity-webhook
+    app.kubernetes.io/name: aws-pod-identity-webhook
+    app.kubernetes.io/instance: aws-pod-identity-webhook
+    app.kubernetes.io/component: aws-pod-identity-webhook
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/version: v0.5.3
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: identity-operator
+spec:
+  secretName: aws-pod-identity-webhook-cert
+  commonName: aws-pod-identity-webhook.tbd-identity-system.svc
+  dnsNames:
+    - aws-pod-identity-webhook
+    - aws-pod-identity-webhook.tbd-identity-system
+    - aws-pod-identity-webhook.tbd-identity-system.svc
+    - aws-pod-identity-webhook.tbd-identity-system.svc.local
+  isCA: true
+  duration: 2160h
+  renewBefore: 360h
+  issuerRef:
+    name: internal
+    kind: ClusterIssuer

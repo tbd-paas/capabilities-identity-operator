@@ -1,0 +1,12 @@
+{
+	"configurations": [
+	{
+		"name": "Test Run",
+		"type": "go",
+		"request": "launch",
+		"mode": "debug",
+		"program": "${workspaceFolder}/main.go",
+		"cwd": "${workspaceFolder}",
+	},
+]
+}

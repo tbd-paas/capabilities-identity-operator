@@ -1,0 +1,169 @@
+commonOverlays:
+  - name: "add namespace markers"
+    query:
+      - metadata.namespace
+      - subjects[*].namespace
+      - "webhooks[*].clientConfig.service.namespace"
+    value: "{{ .defaultNamespace }}"  # +operator-builder:field:name=namespace,default="{{ .defaultNamespace }}",type=string
+
+  - name: "add labels"
+    query:
+      - metadata.labels
+    action: merge
+    value:
+      capabilities.tbd.io/capability: identity
+      capabilities.tbd.io/version: "{{ .operatorVersion}}"
+      capabilities.tbd.io/platform-version: "{{ .platformVersion }}"
+      app.kubernetes.io/version: "{{ .projectVersion }}"
+      app.kubernetes.io/part-of: platform
+      app.kubernetes.io/managed-by: identity-operator
+
+  - name: "add labels to pods"
+    query:
+      - spec.template.metadata.labels
+    action: merge
+    onMissing:
+      action: ignore
+    value:
+      capabilities.tbd.io/capability: identity
+      capabilities.tbd.io/version: "{{ .operatorVersion}}"
+      capabilities.tbd.io/platform-version: "{{ .platformVersion }}"
+      app.kubernetes.io/version: "{{ .projectVersion }}"
+      app.kubernetes.io/part-of: platform
+      app.kubernetes.io/managed-by: identity-operator
+
+  - name: "remove labels"
+    query:
+      - metadata.labels['platform.nukleros.io/category']
+      - metadata.labels['platform.nukleros.io/project']
+      - spec.template.metadata.labels['platform.nukleros.io/category']
+      - spec.template.metadata.labels['platform.nukleros.io/project']
+    action: delete 
+
+  - name: "add node selector"
+    documentQuery:
+      - conditions:
+        - query: $[?($.kind == "Deployment")]
+    query:
+      - spec.template.spec.nodeSelector
+    value:
+      tbd.io/node-type: platform
+      kubernetes.io/arch: arm64
+
+yamlFiles:
+  - name: "aws-pod-identity webhook deployment"
+    path: "../vendor/deployment.yaml"
+    outputPath: "manifests/deployment.yaml"
+    overlays:
+      - name: "add aws-pod-identity webhook replica count marker"
+        query: "$[?($.metadata.name == 'aws-pod-identity webhook')]"
+        value:
+          spec:
+            # +operator-builder:field:name=aws.podIdentityWebhook.replicas,default="%v",type=int,description=`
+            # Number of replicas to use for the AWS pod identity webhook deployment.`
+            replicas: !!int "%v"
+
+      - name: "add aws-pod-identity webhook image name markers"
+        documentQuery:
+          - conditions:
+            - query: $[?($.metadata.name == "aws-pod-identity webhook")]
+        query: "spec.template.spec.containers[?(@.name == 'aws-pod-identity webhook')]"
+        value:
+          # +operator-builder:field:name=aws.podIdentityWebhook.image,default="%v",type=string,description=`
+          # Image to use for AWS pod identity webhook deployment.`
+          image: "%v"
+          resources:
+            requests:
+              # +operator-builder:field:name=aws.podIdentityWebhook.resources.requests.cpu,default="%v",type=string,description=`
+              # CPU requests to use for AWS pod identity webhook deployment.`
+              cpu: "%v"
+              # +operator-builder:field:name=aws.podIdentityWebhook.resources.requests.memory,default="%v",type=string,description=`
+              # Memory requests to use for AWS pod identity webhook deployment.`
+              memory: "%v"
+            limits:
+              # +operator-builder:field:name=aws.podIdentityWebhook.resources.limits.memory,default="%v",type=string,description=`
+              # Memory limits to use for AWS pod identity webhook deployment.`
+              memory: "%v"
+
+      - name: "ensure namespace is updated"
+        query: spec.template.spec.containers[?(@.name == "aws-pod-identity-webhook")].command[?(@ =~ /^--namespace\=/)]
+        value: "--namespace=tbd-identity-system" # +operator-builder:field:name=namespace,replace=tbd-identity-system,default="{{ .defaultNamespace }}",type=string
+
+      - name: "service name is updated"
+        query: spec.template.spec.containers[?(@.name == "aws-pod-identity-webhook")].command[?(@ =~ /^--service-name\=/)]
+        value: "--service-name=aws-pod-identity-webhook"
+
+  - name: "aws-pod-identity webhook rbac"
+    path: "../vendor/rbac.yaml"
+    outputPath: "manifests/rbac.yaml"
+
+  - name: "aws-pod-identity webhook service"
+    path: "../vendor/service.yaml"
+    outputPath: "manifests/service.yaml"
+
+  - name: "aws-pod-identity webhook certificates"
+    path: "../vendor/certificates.yaml"
+    outputPath: "manifests/certificates.yaml"
+    overlays:
+      - name: "ensure we only accept the certificates resource"
+        query: "$"
+        action: delete
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind != "Certificate")]
+
+      - name: "ensure name is updated appropriately"
+        query: metadata.name
+        value: aws-pod-identity-webhook
+
+      - name: "ensure issuer name is used correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.issuerRef
+        action: replace
+        value: 
+          name: "internal"
+          kind: "ClusterIssuer"
+
+      - name: "ensure secret name is used correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.secretName
+        action: replace
+        value: "aws-pod-identity-webhook-cert"
+
+      - name: "ensure certificate common name generated correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.commonName
+        action: replace
+        value: "aws-pod-identity-webhook.{{ .defaultNamespace }}.svc"
+
+      - name: "ensure certificate dns name generated correctly"
+        documentQuery:
+          - conditions:
+              - query: $[?($.kind == "Certificate")]
+        query: spec.dnsNames
+        action: replace
+        value:
+          - "aws-pod-identity-webhook"
+          - "aws-pod-identity-webhook.{{ .defaultNamespace }}"
+          - "aws-pod-identity-webhook.{{ .defaultNamespace }}.svc"
+          - "aws-pod-identity-webhook.{{ .defaultNamespace }}.svc.local"
+
+  - name: "aws-pod-identity webhook webhook"
+    path: "../vendor/webhook.yaml"
+    outputPath: "manifests/webhook.yaml"
+    overlays:
+      - name: "set namespace in CA reference annotation"
+        query: "metadata.annotations"
+        value:
+          # +operator-builder:field:name=namespace,type=string,replace="identity-namespace"
+          cert-manager.io/inject-ca-from: identity-namespace/aws-pod-identity-webhook
+
+      - name: "set namespace in CA reference annotation"
+        query: "metadata.annotations['cert-manager.io/inject-ca-from-secret']"
+        action: delete

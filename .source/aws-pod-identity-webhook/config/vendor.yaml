@@ -1,0 +1,14 @@
+---
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.30.0
+directories:
+  - path: aws-pod-identity-webhook/vendor
+    contents:
+      - path: ./
+        git:
+          url: https://github.com/nukleros/platform-component-library.git
+          ref: v0.2.0
+        includePaths:
+          - identity/aws-pod-identity-webhook/*
+        newRootPath: identity/aws-pod-identity-webhook

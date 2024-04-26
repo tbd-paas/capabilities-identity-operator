@@ -1,0 +1,87 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-pod-identity-webhook
+  namespace: tbd-identity-system # +operator-builder:field:name=namespace,default="tbd-identity-system",type=string
+  labels:
+    app: aws-pod-identity-webhook
+    app.kubernetes.io/name: aws-pod-identity-webhook
+    app.kubernetes.io/instance: aws-pod-identity-webhook
+    app.kubernetes.io/component: aws-pod-identity-webhook
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/version: v0.0.1
+    capabilities.tbd.io/platform-version: unstable
+    app.kubernetes.io/version: v0.5.3
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/managed-by: identity-operator
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aws-pod-identity-webhook
+      app.kubernetes.io/instance: aws-pod-identity-webhook
+      app.kubernetes.io/component: aws-pod-identity-webhook
+  template:
+    metadata:
+      labels:
+        app: aws-pod-identity-webhook
+        app.kubernetes.io/component: aws-pod-identity-webhook
+        app.kubernetes.io/name: aws-pod-identity-webhook
+        app.kubernetes.io/instance: aws-pod-identity-webhook
+        capabilities.tbd.io/capability: identity
+        capabilities.tbd.io/version: v0.0.1
+        capabilities.tbd.io/platform-version: unstable
+        app.kubernetes.io/version: v0.5.3
+        app.kubernetes.io/part-of: platform
+        app.kubernetes.io/managed-by: identity-operator
+    spec:
+      serviceAccountName: aws-pod-identity-webhook
+      containers:
+        - name: aws-pod-identity-webhook
+          image: amazon/amazon-eks-pod-identity-webhook:v0.5.3
+          imagePullPolicy: Always
+          command:
+            - /webhook
+            - --in-cluster=false
+            - --namespace=tbd-identity-system # +operator-builder:field:name=namespace,replace=tbd-identity-system,default="tbd-identity-system",type=string
+            - --service-name=aws-pod-identity-webhook
+            - --annotation-prefix=eks.amazonaws.com
+            - --token-audience=sts.amazonaws.com
+            - --logtostderr
+            - --port=9443
+          volumeMounts:
+            - name: cert
+              mountPath: /etc/webhook/certs
+              readOnly: true
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              memory: 64Mi
+      volumes:
+        - name: cert
+          secret:
+            secretName: aws-pod-identity-webhook-cert
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+        runAsGroup: 1001
+        runAsNonRoot: true
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchExpressions:
+                    - key: app.kubernetes.io/name
+                      operator: In
+                      values:
+                        - aws-pod-identity-webhook
+      nodeSelector:
+        kubernetes.io/os: linux
+        tbd.io/node-type: platform
+        kubernetes.io/arch: arm64
