@@ -92,7 +92,7 @@ func CreateDeploymentNamespaceAwsPodIdentityWebhook(
 									"--namespace=" + parent.Spec.Namespace + "", //  controlled by field: namespace
 									"--service-name=aws-pod-identity-webhook",
 									"--annotation-prefix=eks.amazonaws.com",
-									"--token-audience=sts.amazonaws.com",
+									"--token-audience=kubernetes.default.svc",
 									"--logtostderr",
 									"--port=9443",
 								},

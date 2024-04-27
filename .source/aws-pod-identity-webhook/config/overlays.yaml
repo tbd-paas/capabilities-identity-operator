@@ -93,6 +93,10 @@ yamlFiles:
         query: spec.template.spec.containers[?(@.name == "aws-pod-identity-webhook")].command[?(@ =~ /^--service-name\=/)]
         value: "--service-name=aws-pod-identity-webhook"
 
+      - name: "ensure audience is updated"
+        query: spec.template.spec.containers[?(@.name == "aws-pod-identity-webhook")].command[?(@ =~ /^--token-audience\=/)]
+        value: "--token-audience=kubernetes.default.svc"
+
   - name: "aws-pod-identity webhook rbac"
     path: "../vendor/rbac.yaml"
     outputPath: "manifests/rbac.yaml"

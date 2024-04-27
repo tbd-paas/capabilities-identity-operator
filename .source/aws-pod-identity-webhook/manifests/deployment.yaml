@@ -47,7 +47,7 @@ spec:
             - --namespace=tbd-identity-system # +operator-builder:field:name=namespace,replace=tbd-identity-system,default="tbd-identity-system",type=string
             - --service-name=aws-pod-identity-webhook
             - --annotation-prefix=eks.amazonaws.com
-            - --token-audience=sts.amazonaws.com
+            - --token-audience=kubernetes.default.svc
             - --logtostderr
             - --port=9443
           volumeMounts:
