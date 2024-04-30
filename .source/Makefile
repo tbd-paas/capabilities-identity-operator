@@ -6,7 +6,7 @@ VERSION ?= latest
 INIT_OPTS=init \
 	--workload-config .source/workload.yaml \
    	--repo github.com/tbd-paas/capabilities-identity-operator \
-	--controller-image quay.io/tbd-paas/certificates-operator:$(VERSION) \
+	--controller-image quay.io/tbd-paas/identity-operator:$(VERSION) \
     --skip-go-version-check
 
 CREATE_OPTS=create api \
