@@ -17,7 +17,8 @@ limitations under the License.
 package capabilities
 
 import (
-	v1alpha1capabilities "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1"
+	v1alpha1capabilities "github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1"
+
 	//+kubebuilder:scaffold:operator-builder:imports
 
 	"k8s.io/apimachinery/pkg/runtime/schema"

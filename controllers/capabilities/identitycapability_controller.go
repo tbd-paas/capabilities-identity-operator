@@ -31,10 +31,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1"
-	"github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1/capabilitiesidentity"
-	"github.com/tbd-paas/capabilities-certificates-operator/internal/dependencies"
-	"github.com/tbd-paas/capabilities-certificates-operator/internal/mutate"
+	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1"
+	"github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1/capabilitiesidentity"
+	"github.com/tbd-paas/capabilities-identity-operator/internal/dependencies"
+	"github.com/tbd-paas/capabilities-identity-operator/internal/mutate"
 )
 
 // IdentityCapabilityReconciler reconciles a IdentityCapability object.

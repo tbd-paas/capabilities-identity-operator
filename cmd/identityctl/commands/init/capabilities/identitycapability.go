@@ -22,10 +22,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities"
+	"github.com/tbd-paas/capabilities-identity-operator/apis/capabilities"
 
-	v1alpha1identitycapability "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1/capabilitiesidentity"
-	cmdinit "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/init"
+	v1alpha1identitycapability "github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1/capabilitiesidentity"
+	cmdinit "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/init"
 	//+kubebuilder:scaffold:operator-builder:imports
 )
 

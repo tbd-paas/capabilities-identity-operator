@@ -27,8 +27,8 @@ import (
 
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 
-	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1"
-	"github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1/capabilitiesidentity"
+	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1"
+	"github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1/capabilitiesidentity"
 )
 
 // capabilitiesv1alpha1IdentityCapability tests

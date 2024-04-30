@@ -20,14 +20,14 @@ import (
 	"github.com/spf13/cobra"
 
 	// common imports for subcommands
-	cmdgenerate "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/generate"
-	cmdinit "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/init"
-	cmdversion "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/version"
+	cmdgenerate "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/generate"
+	cmdinit "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/init"
+	cmdversion "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/version"
 
 	// specific imports for workloads
-	generatecapabilities "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/generate/capabilities"
-	initcapabilities "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/init/capabilities"
-	versioncapabilities "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/version/capabilities"
+	generatecapabilities "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/generate/capabilities"
+	initcapabilities "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/init/capabilities"
+	versioncapabilities "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/version/capabilities"
 	//+kubebuilder:scaffold:operator-builder:subcommands:imports
 )
 

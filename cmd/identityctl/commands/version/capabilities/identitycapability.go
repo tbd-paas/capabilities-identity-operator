@@ -19,9 +19,9 @@ package capabilities
 import (
 	"github.com/spf13/cobra"
 
-	cmdversion "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/version"
+	cmdversion "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/version"
 
-	"github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities"
+	"github.com/tbd-paas/capabilities-identity-operator/apis/capabilities"
 )
 
 // NewIdentityCapabilitySubCommand creates a new command and adds it to its

@@ -1,0 +1,705 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+    control-plane: controller-manager
+  name: tbd-operators-system
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identitycapabilities.capabilities.platform.tbd.io
+spec:
+  group: capabilities.platform.tbd.io
+  names:
+    kind: IdentityCapability
+    listKind: IdentityCapabilityList
+    plural: identitycapabilities
+    singular: identitycapability
+  scope: Cluster
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: IdentityCapability is the Schema for the identitycapabilities API.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: IdentityCapabilitySpec defines the desired state of IdentityCapability.
+            properties:
+              namespace:
+                description: "\tNamespace to use where underlying identity capability will be deployed."
+                type: string
+            type: object
+          status:
+            description: IdentityCapabilityStatus defines the observed state of IdentityCapability.
+            properties:
+              conditions:
+                items:
+                  description: |-
+                    PhaseCondition describes an event that has occurred during a phase
+                    of the controller reconciliation loop.
+                  properties:
+                    lastModified:
+                      description: LastModified defines the time in which this component was updated.
+                      type: string
+                    message:
+                      description: Message defines a helpful message from the phase.
+                      type: string
+                    phase:
+                      description: Phase defines the phase in which the condition was set.
+                      type: string
+                    state:
+                      description: PhaseState defines the current state of the phase.
+                      enum:
+                      - Complete
+                      - Reconciling
+                      - Failed
+                      - Pending
+                      type: string
+                  required:
+                  - lastModified
+                  - message
+                  - phase
+                  - state
+                  type: object
+                type: array
+              created:
+                type: boolean
+              dependenciesSatisfied:
+                type: boolean
+              resources:
+                items:
+                  description: ChildResource is the resource and its condition as stored on the workload custom resource's status field.
+                  properties:
+                    condition:
+                      description: ResourceCondition defines the current condition of this resource.
+                      properties:
+                        created:
+                          description: Created defines whether this object has been successfully created or not.
+                          type: boolean
+                        lastModified:
+                          description: LastModified defines the time in which this resource was updated.
+                          type: string
+                        message:
+                          description: Message defines a helpful message from the resource phase.
+                          type: string
+                      required:
+                      - created
+                      type: object
+                    group:
+                      description: Group defines the API Group of the resource.
+                      type: string
+                    kind:
+                      description: Kind defines the kind of the resource.
+                      type: string
+                    name:
+                      description: Name defines the name of the resource from the metadata.name field.
+                      type: string
+                    namespace:
+                      description: Namespace defines the namespace in which this resource exists in.
+                      type: string
+                    version:
+                      description: Version defines the API Version of the resource.
+                      type: string
+                  required:
+                  - group
+                  - kind
+                  - name
+                  - namespace
+                  - version
+                  type: object
+                type: array
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-controller-manager
+  namespace: tbd-operators-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-leader-election-role
+  namespace: tbd-operators-system
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-manager-role
+rules:
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - capabilities.platform.tbd.io
+  resources:
+  - identitycapabilities
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - capabilities.platform.tbd.io
+  resources:
+  - identitycapabilities/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - certificates.k8s.io
+  resources:
+  - certificatesigningrequests
+  verbs:
+  - create
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - get
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - serviceaccounts
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterrolebindings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterroles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - rolebindings
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - roles
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-metrics-reader
+rules:
+- nonResourceURLs:
+  - /metrics
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-proxy-role
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-leader-election-rolebinding
+  namespace: tbd-operators-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: identity-operator-leader-election-role
+subjects:
+- kind: ServiceAccount
+  name: identity-operator-controller-manager
+  namespace: tbd-operators-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: identity-operator-manager-role
+subjects:
+- kind: ServiceAccount
+  name: identity-operator-controller-manager
+  namespace: tbd-operators-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+  name: identity-operator-proxy-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: identity-operator-proxy-role
+subjects:
+- kind: ServiceAccount
+  name: identity-operator-controller-manager
+  namespace: tbd-operators-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+    control-plane: controller-manager
+  name: identity-operator-controller-manager-metrics-service
+  namespace: tbd-operators-system
+spec:
+  ports:
+  - name: https
+    port: 8443
+    protocol: TCP
+    targetPort: https
+  selector:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+    control-plane: controller-manager
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: identity-operator
+    app.kubernetes.io/component: identity-operator
+    app.kubernetes.io/created-by: capabilities-identity-operator
+    app.kubernetes.io/instance: manager
+    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/name: identity-operator
+    app.kubernetes.io/part-of: platform
+    app.kubernetes.io/version: v0.0.1
+    capabilities.tbd.io/capability: identity
+    capabilities.tbd.io/platform-version: unstable
+    capabilities.tbd.io/version: v0.0.1
+    control-plane: controller-manager
+  name: identity-operator-controller-manager
+  namespace: tbd-operators-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-operator
+      app.kubernetes.io/component: identity-operator
+      app.kubernetes.io/instance: manager
+      app.kubernetes.io/managed-by: platform-config-operator
+      app.kubernetes.io/name: identity-operator
+      app.kubernetes.io/part-of: platform
+      app.kubernetes.io/version: v0.0.1
+      capabilities.tbd.io/capability: identity
+      capabilities.tbd.io/platform-version: unstable
+      capabilities.tbd.io/version: v0.0.1
+      control-plane: controller-manager
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: manager
+      labels:
+        app: identity-operator
+        app.kubernetes.io/component: identity-operator
+        app.kubernetes.io/instance: manager
+        app.kubernetes.io/managed-by: platform-config-operator
+        app.kubernetes.io/name: identity-operator
+        app.kubernetes.io/part-of: platform
+        app.kubernetes.io/version: v0.0.1
+        capabilities.tbd.io/capability: identity
+        capabilities.tbd.io/platform-version: unstable
+        capabilities.tbd.io/version: v0.0.1
+        control-plane: controller-manager
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - identity-operator
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - args:
+        - --secure-listen-address=0.0.0.0:8443
+        - --upstream=http://127.0.0.1:8080/
+        - --logtostderr=true
+        - --v=0
+        image: gcr.io/kubebuilder/kube-rbac-proxy:v0.13.1
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 8443
+          name: https
+          protocol: TCP
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 5m
+            memory: 16Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+      - args:
+        - --health-probe-bind-address=:8081
+        - --metrics-bind-address=127.0.0.1:8080
+        - --leader-elect
+        command:
+        - /manager
+        image: quay.io/tbd-paas/identity-operator:latest
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 125m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 16Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+      nodeSelector:
+        kubernetes.io/arch: arm64
+        kubernetes.io/os: linux
+        tbd.io/node-type: platform
+      securityContext:
+        fsGroup: 1001
+        runAsGroup: 1001
+        runAsNonRoot: true
+        runAsUser: 1001
+      serviceAccountName: identity-operator-controller-manager
+      terminationGracePeriodSeconds: 10

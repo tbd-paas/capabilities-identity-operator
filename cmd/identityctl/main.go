@@ -17,7 +17,7 @@ limitations under the License.
 package main
 
 import (
-	"github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands"
+	"github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands"
 )
 
 func main() {

@@ -34,8 +34,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/capabilities/v1alpha1"
-	capabilitiescontrollers "github.com/tbd-paas/capabilities-certificates-operator/controllers/capabilities"
+	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1"
+	capabilitiescontrollers "github.com/tbd-paas/capabilities-identity-operator/controllers/capabilities"
 	//+kubebuilder:scaffold:imports
 )
 

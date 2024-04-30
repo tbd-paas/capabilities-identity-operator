@@ -1,16 +1,25 @@
 # Adds namespace to all resources.
-namespace: capabilities-identity-operator-system
+namespace: tbd-operators-system
 
 # Value of this field is prepended to the
 # names of all resources, e.g. a deployment named
 # "wordpress" becomes "alices-wordpress".
 # Note that it should also match with the prefix (text before '-') of the namespace
 # field above.
-namePrefix: capabilities-identity-operator-
+namePrefix: identity-operator-
 
 # Labels to add to all resources and selectors.
-#commonLabels:
-#  someName: someValue
+commonLabels:
+  app: identity-operator
+  app.kubernetes.io/name: identity-operator
+  app.kubernetes.io/instance: manager
+  app.kubernetes.io/component: identity-operator
+  app.kubernetes.io/version: v0.0.1
+  capabilities.tbd.io/capability: identity
+  capabilities.tbd.io/version: v0.0.1
+  capabilities.tbd.io/platform-version: unstable
+  app.kubernetes.io/part-of: platform
+  app.kubernetes.io/managed-by: platform-config-operator
 
 bases:
 - ../crd
