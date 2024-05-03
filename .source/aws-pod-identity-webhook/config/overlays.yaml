@@ -56,7 +56,7 @@ yamlFiles:
     outputPath: "manifests/deployment.yaml"
     overlays:
       - name: "add aws-pod-identity webhook replica count marker"
-        query: "$[?($.metadata.name == 'aws-pod-identity webhook')]"
+        query: "$[?($.metadata.name == 'aws-pod-identity-webhook')]"
         value:
           spec:
             # +operator-builder:field:name=aws.podIdentityWebhook.replicas,default="%v",type=int,description=`
@@ -66,8 +66,8 @@ yamlFiles:
       - name: "add aws-pod-identity webhook image name markers"
         documentQuery:
           - conditions:
-            - query: $[?($.metadata.name == "aws-pod-identity webhook")]
-        query: "spec.template.spec.containers[?(@.name == 'aws-pod-identity webhook')]"
+            - query: $[?($.metadata.name == "aws-pod-identity-webhook")]
+        query: "spec.template.spec.containers[?(@.name == 'aws-pod-identity-webhook')]"
         value:
           # +operator-builder:field:name=aws.podIdentityWebhook.image,default="%v",type=string,description=`
           # Image to use for AWS pod identity webhook deployment.`

@@ -34,6 +34,16 @@ metadata:
   name: identitycapability-sample
 spec:
   namespace: "tbd-identity-system"
+  aws:
+    podIdentityWebhook:
+      replicas: 2
+      image: "amazon/amazon-eks-pod-identity-webhook:v0.5.3"
+      resources:
+        requests:
+          cpu: "25m"
+          memory: "32Mi"
+        limits:
+          memory: "64Mi"
 `
 
 // sampleIdentityCapabilityRequired is a sample containing only required fields

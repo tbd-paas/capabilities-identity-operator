@@ -39,6 +39,66 @@ type IdentityCapabilitySpec struct {
 	//
 	//	Namespace to use where underlying identity capability will be deployed.
 	Namespace string `json:"namespace,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Aws IdentityCapabilitySpecAws `json:"aws,omitempty"`
+}
+
+type IdentityCapabilitySpecAws struct {
+	// +kubebuilder:validation:Optional
+	PodIdentityWebhook IdentityCapabilitySpecAwsPodIdentityWebhook `json:"podIdentityWebhook,omitempty"`
+}
+
+type IdentityCapabilitySpecAwsPodIdentityWebhook struct {
+	// +kubebuilder:default=2
+	// +kubebuilder:validation:Optional
+	// (Default: 2)
+	//
+	//	Number of replicas to use for the AWS pod identity webhook deployment.
+	Replicas int `json:"replicas,omitempty"`
+
+	// +kubebuilder:default="amazon/amazon-eks-pod-identity-webhook:v0.5.3"
+	// +kubebuilder:validation:Optional
+	// (Default: "amazon/amazon-eks-pod-identity-webhook:v0.5.3")
+	//
+	//	Image to use for AWS pod identity webhook deployment.
+	Image string `json:"image,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Resources IdentityCapabilitySpecAwsPodIdentityWebhookResources `json:"resources,omitempty"`
+}
+
+type IdentityCapabilitySpecAwsPodIdentityWebhookResources struct {
+	// +kubebuilder:validation:Optional
+	Requests IdentityCapabilitySpecAwsPodIdentityWebhookResourcesRequests `json:"requests,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Limits IdentityCapabilitySpecAwsPodIdentityWebhookResourcesLimits `json:"limits,omitempty"`
+}
+
+type IdentityCapabilitySpecAwsPodIdentityWebhookResourcesRequests struct {
+	// +kubebuilder:default="25m"
+	// +kubebuilder:validation:Optional
+	// (Default: "25m")
+	//
+	//	CPU requests to use for AWS pod identity webhook deployment.
+	Cpu string `json:"cpu,omitempty"`
+
+	// +kubebuilder:default="32Mi"
+	// +kubebuilder:validation:Optional
+	// (Default: "32Mi")
+	//
+	//	Memory requests to use for AWS pod identity webhook deployment.
+	Memory string `json:"memory,omitempty"`
+}
+
+type IdentityCapabilitySpecAwsPodIdentityWebhookResourcesLimits struct {
+	// +kubebuilder:default="64Mi"
+	// +kubebuilder:validation:Optional
+	// (Default: "64Mi")
+	//
+	//	Memory limits to use for AWS pod identity webhook deployment.
+	Memory string `json:"memory,omitempty"`
 }
 
 // IdentityCapabilityStatus defines the observed state of IdentityCapability.
