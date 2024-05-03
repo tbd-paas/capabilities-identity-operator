@@ -16,7 +16,7 @@ metadata:
     app.kubernetes.io/part-of: platform
     app.kubernetes.io/managed-by: identity-operator
 spec:
-  # +operator-builder:field:name=aws.podIdentityWebhook.replicas,default="2",type=int,description=`
+  # +operator-builder:field:name=replicas,default="2",type=int,description=`
   # Number of replicas to use for the AWS pod identity webhook deployment.`
   replicas: 2
   selector:
@@ -41,7 +41,7 @@ spec:
       serviceAccountName: aws-pod-identity-webhook
       containers:
         - name: aws-pod-identity-webhook
-          # +operator-builder:field:name=aws.podIdentityWebhook.image,default="amazon/amazon-eks-pod-identity-webhook:v0.5.3",type=string,description=`
+          # +operator-builder:field:name=image,default="amazon/amazon-eks-pod-identity-webhook:v0.5.3",type=string,description=`
           # Image to use for AWS pod identity webhook deployment.`
           image: amazon/amazon-eks-pod-identity-webhook:v0.5.3
           imagePullPolicy: Always
@@ -60,14 +60,14 @@ spec:
               readOnly: true
           resources:
             requests:
-              # +operator-builder:field:name=aws.podIdentityWebhook.resources.requests.cpu,default="25m",type=string,description=`
+              # +operator-builder:field:name=resources.requests.cpu,default="25m",type=string,description=`
               # CPU requests to use for AWS pod identity webhook deployment.`
               cpu: 25m
-              # +operator-builder:field:name=aws.podIdentityWebhook.resources.requests.memory,default="32Mi",type=string,description=`
+              # +operator-builder:field:name=resources.requests.memory,default="32Mi",type=string,description=`
               # Memory requests to use for AWS pod identity webhook deployment.`
               memory: 32Mi
             limits:
-              # +operator-builder:field:name=aws.podIdentityWebhook.resources.limits.memory,default="64Mi",type=string,description=`
+              # +operator-builder:field:name=resources.limits.memory,default="64Mi",type=string,description=`
               # Memory limits to use for AWS pod identity webhook deployment.`
               memory: 64Mi
       volumes:

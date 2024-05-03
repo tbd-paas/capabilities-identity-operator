@@ -61,7 +61,11 @@ operator-create:
 	cd .. && \
 		for workload in $$(find .source -maxdepth 1 -type f -name "workload-*.yaml"); do \
 			$(call operator_builder_create, "$${workload}") ;\
-		done
+		done && \
+	make manifests
+
+operator: download-all overlay-all operator-clean operator-init operator-create restore controller-manifests
+	cd ../ && go mod tidy
 
 #
 # project management

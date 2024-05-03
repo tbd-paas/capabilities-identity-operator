@@ -56,9 +56,9 @@ func CreateDeploymentNamespaceAwsPodIdentityWebhook(
 				},
 			},
 			"spec": map[string]interface{}{
-				// controlled by field: aws.podIdentityWebhook.replicas
+				// controlled by field: replicas
 				//  Number of replicas to use for the AWS pod identity webhook deployment.
-				"replicas": parent.Spec.Aws.PodIdentityWebhook.Replicas,
+				"replicas": parent.Spec.Replicas,
 				"selector": map[string]interface{}{
 					"matchLabels": map[string]interface{}{
 						"app.kubernetes.io/name":      "aws-pod-identity-webhook",
@@ -86,9 +86,9 @@ func CreateDeploymentNamespaceAwsPodIdentityWebhook(
 						"containers": []interface{}{
 							map[string]interface{}{
 								"name": "aws-pod-identity-webhook",
-								// controlled by field: aws.podIdentityWebhook.image
+								// controlled by field: image
 								//  Image to use for AWS pod identity webhook deployment.
-								"image":           parent.Spec.Aws.PodIdentityWebhook.Image,
+								"image":           parent.Spec.Image,
 								"imagePullPolicy": "Always",
 								"command": []interface{}{
 									"/webhook",
@@ -109,17 +109,17 @@ func CreateDeploymentNamespaceAwsPodIdentityWebhook(
 								},
 								"resources": map[string]interface{}{
 									"requests": map[string]interface{}{
-										// controlled by field: aws.podIdentityWebhook.resources.requests.cpu
+										// controlled by field: resources.requests.cpu
 										//  CPU requests to use for AWS pod identity webhook deployment.
-										"cpu": parent.Spec.Aws.PodIdentityWebhook.Resources.Requests.Cpu,
-										// controlled by field: aws.podIdentityWebhook.resources.requests.memory
+										"cpu": parent.Spec.Resources.Requests.Cpu,
+										// controlled by field: resources.requests.memory
 										//  Memory requests to use for AWS pod identity webhook deployment.
-										"memory": parent.Spec.Aws.PodIdentityWebhook.Resources.Requests.Memory,
+										"memory": parent.Spec.Resources.Requests.Memory,
 									},
 									"limits": map[string]interface{}{
-										// controlled by field: aws.podIdentityWebhook.resources.limits.memory
+										// controlled by field: resources.limits.memory
 										//  Memory limits to use for AWS pod identity webhook deployment.
-										"memory": parent.Spec.Aws.PodIdentityWebhook.Resources.Limits.Memory,
+										"memory": parent.Spec.Resources.Limits.Memory,
 									},
 								},
 							},

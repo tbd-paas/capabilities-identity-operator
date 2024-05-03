@@ -40,16 +40,6 @@ type AWSPodIdentityWebhookSpec struct {
 	// (Default: "tbd-identity-system")
 	Namespace string `json:"namespace,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	Aws AWSPodIdentityWebhookSpecAws `json:"aws,omitempty"`
-}
-
-type AWSPodIdentityWebhookSpecAws struct {
-	// +kubebuilder:validation:Optional
-	PodIdentityWebhook AWSPodIdentityWebhookSpecAwsPodIdentityWebhook `json:"podIdentityWebhook,omitempty"`
-}
-
-type AWSPodIdentityWebhookSpecAwsPodIdentityWebhook struct {
 	// +kubebuilder:default=2
 	// +kubebuilder:validation:Optional
 	// (Default: 2)
@@ -65,18 +55,18 @@ type AWSPodIdentityWebhookSpecAwsPodIdentityWebhook struct {
 	Image string `json:"image,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Resources AWSPodIdentityWebhookSpecAwsPodIdentityWebhookResources `json:"resources,omitempty"`
+	Resources AWSPodIdentityWebhookSpecResources `json:"resources,omitempty"`
 }
 
-type AWSPodIdentityWebhookSpecAwsPodIdentityWebhookResources struct {
+type AWSPodIdentityWebhookSpecResources struct {
 	// +kubebuilder:validation:Optional
-	Requests AWSPodIdentityWebhookSpecAwsPodIdentityWebhookResourcesRequests `json:"requests,omitempty"`
+	Requests AWSPodIdentityWebhookSpecResourcesRequests `json:"requests,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Limits AWSPodIdentityWebhookSpecAwsPodIdentityWebhookResourcesLimits `json:"limits,omitempty"`
+	Limits AWSPodIdentityWebhookSpecResourcesLimits `json:"limits,omitempty"`
 }
 
-type AWSPodIdentityWebhookSpecAwsPodIdentityWebhookResourcesRequests struct {
+type AWSPodIdentityWebhookSpecResourcesRequests struct {
 	// +kubebuilder:default="25m"
 	// +kubebuilder:validation:Optional
 	// (Default: "25m")
@@ -92,7 +82,7 @@ type AWSPodIdentityWebhookSpecAwsPodIdentityWebhookResourcesRequests struct {
 	Memory string `json:"memory,omitempty"`
 }
 
-type AWSPodIdentityWebhookSpecAwsPodIdentityWebhookResourcesLimits struct {
+type AWSPodIdentityWebhookSpecResourcesLimits struct {
 	// +kubebuilder:default="64Mi"
 	// +kubebuilder:validation:Optional
 	// (Default: "64Mi")

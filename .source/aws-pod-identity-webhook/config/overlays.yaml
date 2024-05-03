@@ -59,7 +59,7 @@ yamlFiles:
         query: "$[?($.metadata.name == 'aws-pod-identity-webhook')]"
         value:
           spec:
-            # +operator-builder:field:name=aws.podIdentityWebhook.replicas,default="%v",type=int,description=`
+            # +operator-builder:field:name=replicas,default="%v",type=int,description=`
             # Number of replicas to use for the AWS pod identity webhook deployment.`
             replicas: !!int "%v"
 
@@ -69,19 +69,19 @@ yamlFiles:
             - query: $[?($.metadata.name == "aws-pod-identity-webhook")]
         query: "spec.template.spec.containers[?(@.name == 'aws-pod-identity-webhook')]"
         value:
-          # +operator-builder:field:name=aws.podIdentityWebhook.image,default="%v",type=string,description=`
+          # +operator-builder:field:name=image,default="%v",type=string,description=`
           # Image to use for AWS pod identity webhook deployment.`
           image: "%v"
           resources:
             requests:
-              # +operator-builder:field:name=aws.podIdentityWebhook.resources.requests.cpu,default="%v",type=string,description=`
+              # +operator-builder:field:name=resources.requests.cpu,default="%v",type=string,description=`
               # CPU requests to use for AWS pod identity webhook deployment.`
               cpu: "%v"
-              # +operator-builder:field:name=aws.podIdentityWebhook.resources.requests.memory,default="%v",type=string,description=`
+              # +operator-builder:field:name=resources.requests.memory,default="%v",type=string,description=`
               # Memory requests to use for AWS pod identity webhook deployment.`
               memory: "%v"
             limits:
-              # +operator-builder:field:name=aws.podIdentityWebhook.resources.limits.memory,default="%v",type=string,description=`
+              # +operator-builder:field:name=resources.limits.memory,default="%v",type=string,description=`
               # Memory limits to use for AWS pod identity webhook deployment.`
               memory: "%v"
 

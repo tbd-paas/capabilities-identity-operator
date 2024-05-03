@@ -40,50 +40,44 @@ spec:
           spec:
             description: AWSPodIdentityWebhookSpec defines the desired state of AWSPodIdentityWebhook.
             properties:
-              aws:
-                properties:
-                  podIdentityWebhook:
-                    properties:
-                      image:
-                        default: amazon/amazon-eks-pod-identity-webhook:v0.5.3
-                        description: "(Default: \"amazon/amazon-eks-pod-identity-webhook:v0.5.3\")\n\n\n\tImage
-                          to use for AWS pod identity webhook deployment."
-                        type: string
-                      replicas:
-                        default: 2
-                        description: "(Default: 2)\n\n\n\tNumber of replicas to use
-                          for the AWS pod identity webhook deployment."
-                        type: integer
-                      resources:
-                        properties:
-                          limits:
-                            properties:
-                              memory:
-                                default: 64Mi
-                                description: "(Default: \"64Mi\")\n\n\n\tMemory limits
-                                  to use for AWS pod identity webhook deployment."
-                                type: string
-                            type: object
-                          requests:
-                            properties:
-                              cpu:
-                                default: 25m
-                                description: "(Default: \"25m\")\n\n\n\tCPU requests
-                                  to use for AWS pod identity webhook deployment."
-                                type: string
-                              memory:
-                                default: 32Mi
-                                description: "(Default: \"32Mi\")\n\n\n\tMemory requests
-                                  to use for AWS pod identity webhook deployment."
-                                type: string
-                            type: object
-                        type: object
-                    type: object
-                type: object
+              image:
+                default: amazon/amazon-eks-pod-identity-webhook:v0.5.3
+                description: "(Default: \"amazon/amazon-eks-pod-identity-webhook:v0.5.3\")\n\n\n\tImage
+                  to use for AWS pod identity webhook deployment."
+                type: string
               namespace:
                 default: tbd-identity-system
                 description: '(Default: "tbd-identity-system")'
                 type: string
+              replicas:
+                default: 2
+                description: "(Default: 2)\n\n\n\tNumber of replicas to use for the
+                  AWS pod identity webhook deployment."
+                type: integer
+              resources:
+                properties:
+                  limits:
+                    properties:
+                      memory:
+                        default: 64Mi
+                        description: "(Default: \"64Mi\")\n\n\n\tMemory limits to
+                          use for AWS pod identity webhook deployment."
+                        type: string
+                    type: object
+                  requests:
+                    properties:
+                      cpu:
+                        default: 25m
+                        description: "(Default: \"25m\")\n\n\n\tCPU requests to use
+                          for AWS pod identity webhook deployment."
+                        type: string
+                      memory:
+                        default: 32Mi
+                        description: "(Default: \"32Mi\")\n\n\n\tMemory requests to
+                          use for AWS pod identity webhook deployment."
+                        type: string
+                    type: object
+                type: object
             type: object
           status:
             description: AWSPodIdentityWebhookStatus defines the observed state of
