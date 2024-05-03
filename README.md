@@ -24,7 +24,7 @@ To clean up:
 
 First, set the image:
 
-    export IMG=quay.io/tbd-paas/identity-operator:latest
+    export IMG=quay.io/tbd-paas/certificates-operator:latest
 
 Now you can build and push the image:
 

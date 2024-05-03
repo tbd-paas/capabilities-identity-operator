@@ -1,4 +1,4 @@
-module github.com/tbd-paas/capabilities-identity-operator
+module github.com/tbd-paas/capabilities-certificates-operator
 
 go 1.22
 

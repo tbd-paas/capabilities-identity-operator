@@ -34,8 +34,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	capabilitiesv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/capabilities/v1alpha1"
-	capabilitiescontrollers "github.com/tbd-paas/capabilities-identity-operator/controllers/capabilities"
+	identityv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1"
+	identitycontrollers "github.com/tbd-paas/capabilities-certificates-operator/controllers/identity"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -52,7 +52,7 @@ var (
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
-	utilruntime.Must(capabilitiesv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(identityv1alpha1.AddToScheme(scheme))
 	//+kubebuilder:scaffold:scheme
 }
 
@@ -108,7 +108,7 @@ func main() {
 		Scheme:                 scheme,
 		HealthProbeBindAddress: probeAddr,
 		LeaderElection:         enableLeaderElection,
-		LeaderElectionID:       "66d434db.platform.tbd.io",
+		LeaderElectionID:       "ffa8b829.platform.tbd.io",
 		Metrics: metricsserver.Options{
 			BindAddress:   metricsAddr,
 			SecureServing: secureMetrics,
@@ -121,7 +121,7 @@ func main() {
 	}
 
 	reconcilers := []ReconcilerInitializer{
-		capabilitiescontrollers.NewIdentityCapabilityReconciler(mgr),
+		identitycontrollers.NewAWSPodIdentityWebhookReconciler(mgr),
 		//+kubebuilder:scaffold:reconcilers
 	}
 

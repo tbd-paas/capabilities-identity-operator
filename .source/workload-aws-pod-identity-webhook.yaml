@@ -1,0 +1,18 @@
+kind: StandaloneWorkload
+name: aws-pod-identity-webhook
+spec:
+  api:
+    clusterScoped: true
+    domain: platform.tbd.io
+    group: identity
+    kind: AWSPodIdentityWebhook
+    version: v1alpha1
+  companionCliRootcmd:
+    name: identityctl
+    description: Manage the identity capability
+  resources:
+    - aws-pod-identity-webhook/manifests/rbac.yaml
+    - aws-pod-identity-webhook/manifests/certificates.yaml
+    - aws-pod-identity-webhook/manifests/deployment.yaml
+    - aws-pod-identity-webhook/manifests/service.yaml
+    - aws-pod-identity-webhook/manifests/webhook.yaml

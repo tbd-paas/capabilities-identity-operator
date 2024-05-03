@@ -14,13 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package main
+package identity
 
 import (
-	"github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands"
+	v1alpha1identity "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1"
+	//+kubebuilder:scaffold:operator-builder:imports
+
+	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
-func main() {
-	identityctl := commands.NewIdentityctlCommand()
-	identityctl.Run()
+// AWSPodIdentityWebhookGroupVersions returns all group version objects associated with this kind.
+func AWSPodIdentityWebhookGroupVersions() []schema.GroupVersion {
+	return []schema.GroupVersion{
+		v1alpha1identity.GroupVersion,
+		//+kubebuilder:scaffold:operator-builder:groupversions
+	}
 }

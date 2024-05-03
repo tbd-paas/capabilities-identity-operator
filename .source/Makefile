@@ -3,26 +3,30 @@ VERSION ?= latest
 #
 # code generation
 #
-INIT_OPTS=init \
-	--workload-config .source/workload.yaml \
-   	--repo github.com/tbd-paas/capabilities-identity-operator \
-	--controller-image quay.io/tbd-paas/identity-operator:$(VERSION) \
-    --skip-go-version-check
+WORKLOAD_CONFIG ?= .source/workload-aws-pod-identity-webhook.yaml
+define operator_builder_init
+	operator-builder init \
+		--workload-config $(WORKLOAD_CONFIG) \
+		--repo github.com/tbd-paas/capabilities-certificates-operator \
+		--controller-image quay.io/tbd-paas/certificates-operator:$(VERSION) \
+		--skip-go-version-check
+endef
 
-CREATE_OPTS=create api \
-	--workload-config .source/workload.yaml \
-	--controller \
-	--resource \
-	--force
+define operator_builder_create
+	operator-builder create api \
+		--workload-config $1 \
+		--controller \
+		--resource \
+		--force
+endef
 
-MANAGED_ASSETS=../config/install \
+MANAGED_ASSETS=../go.mod \
 	../README.md \
-	../Makefile \
-	../Dockerfile \
-	../go.mod \
-	../controllers/capabilities/certificatescapability_phases.go \
-	../phases \
-	../.gitignore
+	../.gitignore \
+	../.dockerignore \
+	../config/default/kustomization.yaml \
+	../config/default/manager_auth_proxy_patch.yaml \
+	../controllers/identity/awspodidentitywebhook_phases.go
 
 # preserve manually mananged assets
 preserve:
@@ -51,10 +55,13 @@ operator-clean: preserve
 	rm -rf ../*
 
 operator-init:
-	cd .. && operator-builder $(INIT_OPTS)
+	cd .. && $(call operator_builder_init)
 
 operator-create:
-	cd .. && operator-builder $(CREATE_OPTS)
+	cd .. && \
+		for workload in $$(find .source -maxdepth 1 -type f -name "workload-*.yaml"); do \
+			$(call operator_builder_create, "$${workload}") ;\
+		done
 
 #
 # project management

@@ -14,13 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package main
+package mutate
 
 import (
-	"github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands"
+	"github.com/nukleros/operator-builder-tools/pkg/controller/workload"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func main() {
-	identityctl := commands.NewIdentityctlCommand()
-	identityctl.Run()
+// AWSPodIdentityWebhookMutate performs the logic to mutate resources that belong to the parent.
+func AWSPodIdentityWebhookMutate(
+	r workload.Reconciler,
+	req *workload.Request,
+	object client.Object,
+) (replacedObjects []client.Object, skip bool, err error) {
+	return []client.Object{object}, false, nil
 }

@@ -1,6 +1,6 @@
 
 # Image URL to use all building/pushing image targets
-IMG ?= "quay.io/tbd-paas/identity-operator:latest"
+IMG ?= "quay.io/tbd-paas/certificates-operator:latest"
 # Produce CRDs that work back to Kubernetes 1.11 (no version conversion)
 CRD_OPTIONS ?= "crd:crdVersions=v1"
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
@@ -61,7 +61,7 @@ test: manifests generate fmt vet envtest ## Run tests.
 
 .PHONY: test-e2e
 test-e2e: ## Run E2E tests against a running Kubernetes cluster.
-	go test github.com/tbd-paas/capabilities-identity-operator/test/e2e -tags=e2e_test -count=1
+	go test github.com/tbd-paas/capabilities-certificates-operator/test/e2e -tags=e2e_test -count=1
 
 ##@ Build
 

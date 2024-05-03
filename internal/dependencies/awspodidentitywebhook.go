@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package main
+package dependencies
 
 import (
-	"github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands"
+	"github.com/nukleros/operator-builder-tools/pkg/controller/workload"
 )
 
-func main() {
-	identityctl := commands.NewIdentityctlCommand()
-	identityctl.Run()
+// AWSPodIdentityWebhookCheckReady performs the logic to determine if a AWSPodIdentityWebhook object is ready.
+func AWSPodIdentityWebhookCheckReady(r workload.Reconciler, req *workload.Request) (bool, error) {
+	return true, nil
 }

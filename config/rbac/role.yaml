@@ -29,26 +29,6 @@ rules:
   - update
   - watch
 - apiGroups:
-  - capabilities.platform.tbd.io
-  resources:
-  - identitycapabilities
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - capabilities.platform.tbd.io
-  resources:
-  - identitycapabilities/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
   - cert-manager.io
   resources:
   - certificates
@@ -72,14 +52,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - endpoints
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
   - events
   verbs:
   - create
@@ -91,12 +63,7 @@ rules:
   resources:
   - namespaces
   verbs:
-  - create
-  - delete
-  - get
   - list
-  - patch
-  - update
   - watch
 - apiGroups:
   - ""
@@ -131,6 +98,26 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - identity.platform.tbd.io
+  resources:
+  - awspodidentitywebhooks
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - identity.platform.tbd.io
+  resources:
+  - awspodidentitywebhooks/status
+  verbs:
+  - get
+  - patch
+  - update
 - apiGroups:
   - rbac.authorization.k8s.io
   resources:

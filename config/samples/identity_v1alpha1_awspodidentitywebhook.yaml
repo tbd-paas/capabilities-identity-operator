@@ -1,0 +1,16 @@
+apiVersion: identity.platform.tbd.io/v1alpha1
+kind: AWSPodIdentityWebhook
+metadata:
+  name: awspodidentitywebhook-sample
+spec:
+  namespace: "tbd-identity-system"
+  aws:
+    podIdentityWebhook:
+      replicas: 2
+      image: "amazon/amazon-eks-pod-identity-webhook:v0.5.3"
+      resources:
+        requests:
+          cpu: "25m"
+          memory: "32Mi"
+        limits:
+          memory: "64Mi"
