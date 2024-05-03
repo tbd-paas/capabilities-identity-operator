@@ -21,7 +21,7 @@ import (
 
 	"github.com/nukleros/operator-builder-tools/pkg/controller/workload"
 
-	identityv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1"
+	identityv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
 )
 
 // MutateServiceNamespaceAwsPodIdentityWebhook mutates the Service resource with name aws-pod-identity-webhook.

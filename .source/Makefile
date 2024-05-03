@@ -7,8 +7,8 @@ WORKLOAD_CONFIG ?= .source/workload-aws-pod-identity-webhook.yaml
 define operator_builder_init
 	operator-builder init \
 		--workload-config $(WORKLOAD_CONFIG) \
-		--repo github.com/tbd-paas/capabilities-certificates-operator \
-		--controller-image quay.io/tbd-paas/certificates-operator:$(VERSION) \
+		--repo github.com/tbd-paas/capabilities-identity-operator \
+		--controller-image quay.io/tbd-paas/identity-operator:$(VERSION) \
 		--skip-go-version-check
 endef
 
@@ -52,7 +52,7 @@ restore:
 	@cp -R assets/* ..
 
 operator-clean: preserve
-	rm -rf ../*
+	sudo rm -rf ../bin && rm -rf ../*
 
 operator-init:
 	cd .. && $(call operator_builder_init)

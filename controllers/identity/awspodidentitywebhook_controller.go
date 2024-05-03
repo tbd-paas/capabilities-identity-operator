@@ -31,10 +31,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	identityv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1"
-	"github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1/awspodidentitywebhook"
-	"github.com/tbd-paas/capabilities-certificates-operator/internal/dependencies"
-	"github.com/tbd-paas/capabilities-certificates-operator/internal/mutate"
+	identityv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
+	"github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1/awspodidentitywebhook"
+	"github.com/tbd-paas/capabilities-identity-operator/internal/dependencies"
+	"github.com/tbd-paas/capabilities-identity-operator/internal/mutate"
 )
 
 // AWSPodIdentityWebhookReconciler reconciles a AWSPodIdentityWebhook object.

@@ -13,7 +13,7 @@ plugins:
     enableOlm: false
     workloadConfigPath: .source/workload-aws-pod-identity-webhook.yaml
 projectName: capabilities-identity-operator
-repo: github.com/tbd-paas/capabilities-certificates-operator
+repo: github.com/tbd-paas/capabilities-identity-operator
 resources:
 - api:
     crdVersion: v1
@@ -22,7 +22,7 @@ resources:
   domain: platform.tbd.io
   group: identity
   kind: AWSPodIdentityWebhook
-  path: github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1
+  path: github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1
   version: v1alpha1
 - kind: ""
   version: ""

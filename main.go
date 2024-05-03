@@ -34,8 +34,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	identityv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1"
-	identitycontrollers "github.com/tbd-paas/capabilities-certificates-operator/controllers/identity"
+	identityv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
+	identitycontrollers "github.com/tbd-paas/capabilities-identity-operator/controllers/identity"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -108,7 +108,7 @@ func main() {
 		Scheme:                 scheme,
 		HealthProbeBindAddress: probeAddr,
 		LeaderElection:         enableLeaderElection,
-		LeaderElectionID:       "ffa8b829.platform.tbd.io",
+		LeaderElectionID:       "66d434db.platform.tbd.io",
 		Metrics: metricsserver.Options{
 			BindAddress:   metricsAddr,
 			SecureServing: secureMetrics,

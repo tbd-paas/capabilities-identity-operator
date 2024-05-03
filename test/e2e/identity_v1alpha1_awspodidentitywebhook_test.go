@@ -27,8 +27,8 @@ import (
 
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 
-	identityv1alpha1 "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1"
-	"github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1/awspodidentitywebhook"
+	identityv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
+	"github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1/awspodidentitywebhook"
 )
 
 // identityv1alpha1AWSPodIdentityWebhook tests

@@ -29,9 +29,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	// common imports for subcommands
-	cmdgenerate "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/generate"
+	cmdgenerate "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/generate"
 	// specific imports for workloads
-	v1alpha1awspodidentitywebhook "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1/awspodidentitywebhook"
+	v1alpha1awspodidentitywebhook "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1/awspodidentitywebhook"
 	//+kubebuilder:scaffold:operator-builder:imports
 )
 

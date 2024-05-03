@@ -22,10 +22,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/tbd-paas/capabilities-certificates-operator/apis/identity"
+	"github.com/tbd-paas/capabilities-identity-operator/apis/identity"
 
-	v1alpha1awspodidentitywebhook "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1/awspodidentitywebhook"
-	cmdinit "github.com/tbd-paas/capabilities-certificates-operator/cmd/identityctl/commands/init"
+	v1alpha1awspodidentitywebhook "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1/awspodidentitywebhook"
+	cmdinit "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/init"
 	//+kubebuilder:scaffold:operator-builder:imports
 )
 

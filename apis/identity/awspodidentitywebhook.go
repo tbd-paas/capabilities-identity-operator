@@ -17,7 +17,7 @@ limitations under the License.
 package identity
 
 import (
-	v1alpha1identity "github.com/tbd-paas/capabilities-certificates-operator/apis/identity/v1alpha1"
+	v1alpha1identity "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
 	//+kubebuilder:scaffold:operator-builder:imports
 
 	"k8s.io/apimachinery/pkg/runtime/schema"
