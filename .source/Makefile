@@ -24,6 +24,10 @@ MANAGED_ASSETS=../go.mod \
 	../README.md \
 	../.gitignore \
 	../.dockerignore \
+	../.github/workflows/release.yml \
+	../.goreleaser.yml \
+	../Dockerfile \
+	../LICENSE \
 	../config/default/kustomization.yaml \
 	../config/default/manager_auth_proxy_patch.yaml \
 	../controllers/identity/awspodidentitywebhook_phases.go
