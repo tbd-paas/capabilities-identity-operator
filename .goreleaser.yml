@@ -44,6 +44,14 @@ changelog:
       - '^chore(\(.*\))?:'
       - '^build(\(.*\))?:'
 
+release:
+  replace_existing_artifacts: true
+  make_latest: true
+  include_meta: true
+  extra_files:
+    - glob: "{{ .Env.MANIFESTS_FILE }}"
+      name_template: "{{ .Env.MANIFESTS_ARTIFACT_NAME }}"
+
 # TODO: add homebrew tap
 # brews:
 #   - name: "identityctl"

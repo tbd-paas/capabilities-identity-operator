@@ -27,3 +27,6 @@ Dockerfile.cross
 
 # do not store preserved assets in git
 .source/assets
+
+# do not store generated manifests in git
+*.yaml.generated
