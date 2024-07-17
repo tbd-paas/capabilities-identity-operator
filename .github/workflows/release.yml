@@ -58,9 +58,10 @@ jobs:
 
       - name: "Generate Controller Manifests"
         run: |
-          make kustomize
-          cd config/manager && ../../bin/kustomize edit set image controller=${{ env.IMAGE }}:${{ github.ref_name }}
-          cd ../../ && bin/kustomize build config/default > /tmp/manifests.yaml
+          export CONTROLLER_IMG="${{ env.IMAGE }}:${{ github.ref_name }}"
+          export MANIFESTS_FILE="/tmp/manifests.yaml"
+          cd .source
+          make controller-manifests
 
       - name: "Upload Controller Manifests to Release"
         uses: "xresloader/upload-to-github-release@v1"

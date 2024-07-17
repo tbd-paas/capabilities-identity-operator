@@ -103,6 +103,7 @@ overlay-all:
 
 # controller manifests
 CONTROLLER_IMG ?= quay.io/tbd-paas/identity-operator:latest
+MANIFESTS_FILE ?= ../../config/deploy/manifests.yaml
 controller-manifests:
 	cd .. && \
 	make kustomize && \
@@ -110,4 +111,4 @@ controller-manifests:
 	cd config/manager && \
 	export KUSTOMIZE_CMD=$$(ls ../../bin/kustomize*) && \
 	$$KUSTOMIZE_CMD edit set image controller=$(CONTROLLER_IMG) && \
-	$$KUSTOMIZE_CMD build ../../config/default > ../../config/deploy/manifests.yaml
+	$$KUSTOMIZE_CMD build ../../config/default > $(MANIFESTS_FILE)
