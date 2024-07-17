@@ -48,7 +48,6 @@ commonOverlays:
       - spec.template.spec.nodeSelector
     value:
       tbd.io/node-type: platform
-      kubernetes.io/arch: arm64
 
 yamlFiles:
   - name: "aws-pod-identity webhook deployment"

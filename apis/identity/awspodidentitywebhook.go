@@ -18,7 +18,7 @@ package identity
 
 import (
 	v1alpha1identity "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
-	//+kubebuilder:scaffold:operator-builder:imports
+	// +kubebuilder:scaffold:operator-builder:imports
 
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
@@ -27,6 +27,6 @@ import (
 func AWSPodIdentityWebhookGroupVersions() []schema.GroupVersion {
 	return []schema.GroupVersion{
 		v1alpha1identity.GroupVersion,
-		//+kubebuilder:scaffold:operator-builder:groupversions
+		// +kubebuilder:scaffold:operator-builder:groupversions
 	}
 }

@@ -3,13 +3,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app.kubernetes.io/name: clusterrole
-    app.kubernetes.io/instance: awspodidentitywebhook-editor-role
-    app.kubernetes.io/component: rbac
-    app.kubernetes.io/created-by: capabilities-identity-operator
-    app.kubernetes.io/part-of: capabilities-identity-operator
+    app.kubernetes.io/name: capabilities-identity-operator
     app.kubernetes.io/managed-by: kustomize
-  name: awspodidentitywebhook-editor-role
+  name: identity-awspodidentitywebhook-editor-role
 rules:
 - apiGroups:
   - identity.platform.tbd.io

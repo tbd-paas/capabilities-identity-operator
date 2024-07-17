@@ -28,7 +28,7 @@ import (
 	generateidentity "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/generate/identity"
 	initidentity "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/init/identity"
 	versionidentity "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/version/identity"
-	//+kubebuilder:scaffold:operator-builder:subcommands:imports
+	// +kubebuilder:scaffold:operator-builder:subcommands:imports
 )
 
 // IdentityctlCommand represents the base command when called without any subcommands.
@@ -63,7 +63,7 @@ func (c *IdentityctlCommand) newInitSubCommand() {
 
 	// add the init subcommands
 	initidentity.NewAWSPodIdentityWebhookSubCommand(parentCommand)
-	//+kubebuilder:scaffold:operator-builder:subcommands:init
+	// +kubebuilder:scaffold:operator-builder:subcommands:init
 }
 
 func (c *IdentityctlCommand) newGenerateSubCommand() {
@@ -72,7 +72,7 @@ func (c *IdentityctlCommand) newGenerateSubCommand() {
 
 	// add the generate subcommands
 	generateidentity.NewAWSPodIdentityWebhookSubCommand(parentCommand)
-	//+kubebuilder:scaffold:operator-builder:subcommands:generate
+	// +kubebuilder:scaffold:operator-builder:subcommands:generate
 }
 
 func (c *IdentityctlCommand) newVersionSubCommand() {
@@ -81,7 +81,7 @@ func (c *IdentityctlCommand) newVersionSubCommand() {
 
 	// add the version subcommands
 	versionidentity.NewAWSPodIdentityWebhookSubCommand(parentCommand)
-	//+kubebuilder:scaffold:operator-builder:subcommands:version
+	// +kubebuilder:scaffold:operator-builder:subcommands:version
 }
 
 // addSubCommands adds any additional subCommands to the root command.

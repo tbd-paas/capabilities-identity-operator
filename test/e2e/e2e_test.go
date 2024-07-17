@@ -53,7 +53,7 @@ import (
 
 	"github.com/nukleros/operator-builder-tools/pkg/controller/workload"
 	"github.com/nukleros/operator-builder-tools/pkg/resources"
-	kbresource "sigs.k8s.io/kubebuilder/v3/pkg/model/resource"
+	kbresource "sigs.k8s.io/kubebuilder/v4/pkg/model/resource"
 )
 
 // E2ETestSuiteConfig represents the entire suite of tests.

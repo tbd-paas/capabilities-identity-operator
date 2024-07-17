@@ -24,8 +24,6 @@ import (
 	identityv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
 )
 
-// +kubebuilder:rbac:groups=core,resources=endpoints,verbs=get;list;watch
-
 // MutateMutatingWebhookNamespaceAwsPodIdentityWebhook mutates the MutatingWebhookConfiguration resource with name aws-pod-identity-webhook.
 func MutateMutatingWebhookNamespaceAwsPodIdentityWebhook(
 	original client.Object,

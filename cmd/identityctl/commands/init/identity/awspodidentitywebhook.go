@@ -26,7 +26,7 @@ import (
 
 	v1alpha1awspodidentitywebhook "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1/awspodidentitywebhook"
 	cmdinit "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/init"
-	//+kubebuilder:scaffold:operator-builder:imports
+	// +kubebuilder:scaffold:operator-builder:imports
 )
 
 // getAWSPodIdentityWebhookManifest returns the sample AWSPodIdentityWebhook manifest
@@ -40,7 +40,7 @@ func getAWSPodIdentityWebhookManifest(i *cmdinit.InitSubCommand) (string, error)
 	// generate a map of all versions to samples for each api version created
 	manifestMap := map[string]string{
 		"v1alpha1": v1alpha1awspodidentitywebhook.Sample(i.RequiredOnly),
-		//+kubebuilder:scaffold:operator-builder:versionmap
+		// +kubebuilder:scaffold:operator-builder:versionmap
 	}
 
 	// return the manifest if it is not blank

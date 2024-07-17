@@ -32,7 +32,7 @@ import (
 	cmdgenerate "github.com/tbd-paas/capabilities-identity-operator/cmd/identityctl/commands/generate"
 	// specific imports for workloads
 	v1alpha1awspodidentitywebhook "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1/awspodidentitywebhook"
-	//+kubebuilder:scaffold:operator-builder:imports
+	// +kubebuilder:scaffold:operator-builder:imports
 )
 
 // NewAWSPodIdentityWebhookSubCommand creates a new command and adds it to its
@@ -75,7 +75,7 @@ func GenerateAWSPodIdentityWebhook(g *cmdgenerate.GenerateSubCommand) error {
 	type generateFunc func([]byte) ([]client.Object, error)
 	generateFuncMap := map[string]generateFunc{
 		"v1alpha1": v1alpha1awspodidentitywebhook.GenerateForCLI,
-		//+kubebuilder:scaffold:operator-builder:versionmap
+		// +kubebuilder:scaffold:operator-builder:versionmap
 	}
 
 	generate := generateFuncMap[apiVersion]

@@ -107,5 +107,7 @@ controller-manifests:
 	cd .. && \
 	make kustomize && \
 	mkdir -p config/deploy && \
-	cd config/manager && ../../bin/kustomize edit set image controller=$(CONTROLLER_IMG) && \
-	cd ../../ && bin/kustomize build config/default > config/deploy/manifests.yaml
+	cd config/manager && \
+	export KUSTOMIZE_CMD=$$(ls ../../bin/kustomize*) && \
+	$$KUSTOMIZE_CMD edit set image controller=$(CONTROLLER_IMG) && \
+	$$KUSTOMIZE_CMD build ../../config/default > ../../config/deploy/manifests.yaml

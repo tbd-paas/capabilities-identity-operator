@@ -4,7 +4,7 @@
 # More info: https://book.kubebuilder.io/reference/project-config.html
 domain: platform.tbd.io
 layout:
-- go.kubebuilder.io/v3
+- operatorbuilder.io/v2
 multigroup: true
 plugins:
   operatorBuilder:

@@ -36,7 +36,7 @@ import (
 
 	identityv1alpha1 "github.com/tbd-paas/capabilities-identity-operator/apis/identity/v1alpha1"
 	identitycontrollers "github.com/tbd-paas/capabilities-identity-operator/controllers/identity"
-	//+kubebuilder:scaffold:imports
+	// +kubebuilder:scaffold:imports
 )
 
 type ReconcilerInitializer interface {
@@ -53,7 +53,7 @@ func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
 
 	utilruntime.Must(identityv1alpha1.AddToScheme(scheme))
-	//+kubebuilder:scaffold:scheme
+	// +kubebuilder:scaffold:scheme
 }
 
 func main() {
@@ -115,6 +115,7 @@ func main() {
 			TLSOpts:       tlsOpts,
 		},
 	})
+
 	if err != nil {
 		setupLog.Error(err, "unable to start manager")
 		os.Exit(1)
@@ -122,7 +123,7 @@ func main() {
 
 	reconcilers := []ReconcilerInitializer{
 		identitycontrollers.NewAWSPodIdentityWebhookReconciler(mgr),
-		//+kubebuilder:scaffold:reconcilers
+		// +kubebuilder:scaffold:reconcilers
 	}
 
 	for _, reconciler := range reconcilers {
