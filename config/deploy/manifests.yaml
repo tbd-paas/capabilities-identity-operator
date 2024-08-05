@@ -2,16 +2,14 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
     control-plane: controller-manager
   name: tbd-operators-system
 ---
@@ -21,16 +19,13 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.15.0
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: awspodidentitywebhooks.identity.platform.tbd.io
 spec:
   group: identity.platform.tbd.io
@@ -206,16 +201,14 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: identity-operator-controller-manager
   namespace: tbd-operators-system
 ---
@@ -223,16 +216,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: identity-operator-leader-election-role
   namespace: tbd-operators-system
 rules:
@@ -272,16 +263,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: identity-operator-identity-awspodidentitywebhook-editor-role
 rules:
 - apiGroups:
@@ -307,16 +296,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: identity-operator-identity-awspodidentitywebhook-viewer-role
 rules:
 - apiGroups:
@@ -338,16 +325,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: identity-operator-manager-role
 rules:
 - apiGroups:
@@ -517,16 +501,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: identity-operator-leader-election-rolebinding
   namespace: tbd-operators-system
 roleRef:
@@ -542,16 +524,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
   name: identity-operator-manager-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -566,16 +546,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: identity-operator
-    app.kubernetes.io/component: identity-operator
-    app.kubernetes.io/instance: manager
-    app.kubernetes.io/managed-by: platform-config-operator
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: identity-operator
     app.kubernetes.io/part-of: platform
-    app.kubernetes.io/version: v0.0.1
+    app.kubernetes.io/version: unstable
     capabilities.tbd.io/capability: identity
     capabilities.tbd.io/platform-version: unstable
-    capabilities.tbd.io/version: v0.0.1
     control-plane: controller-manager
   name: identity-operator-controller-manager
   namespace: tbd-operators-system
@@ -583,35 +561,46 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: identity-operator
-      app.kubernetes.io/component: identity-operator
-      app.kubernetes.io/instance: manager
-      app.kubernetes.io/managed-by: platform-config-operator
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: default
       app.kubernetes.io/name: identity-operator
       app.kubernetes.io/part-of: platform
-      app.kubernetes.io/version: v0.0.1
+      app.kubernetes.io/version: unstable
       capabilities.tbd.io/capability: identity
       capabilities.tbd.io/platform-version: unstable
-      capabilities.tbd.io/version: v0.0.1
       control-plane: controller-manager
   template:
     metadata:
       annotations:
         kubectl.kubernetes.io/default-container: manager
       labels:
-        app: identity-operator
-        app.kubernetes.io/component: identity-operator
-        app.kubernetes.io/instance: manager
-        app.kubernetes.io/managed-by: platform-config-operator
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: default
         app.kubernetes.io/name: identity-operator
         app.kubernetes.io/part-of: platform
-        app.kubernetes.io/version: v0.0.1
+        app.kubernetes.io/version: unstable
         capabilities.tbd.io/capability: identity
         capabilities.tbd.io/platform-version: unstable
-        capabilities.tbd.io/version: v0.0.1
         control-plane: controller-manager
     spec:
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+                - arm64
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+              - key: tbd.io/node-type
+                operator: In
+                values:
+                - platform
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -680,10 +669,6 @@ spec:
             drop:
             - ALL
           readOnlyRootFilesystem: true
-      nodeSelector:
-        kubernetes.io/arch: arm64
-        kubernetes.io/os: linux
-        tbd.io/node-type: platform
       securityContext:
         fsGroup: 1001
         runAsGroup: 1001

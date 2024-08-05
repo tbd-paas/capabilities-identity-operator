@@ -13,10 +13,6 @@ spec:
         runAsUser: 1001
         runAsGroup: 1001
         runAsNonRoot: true
-      nodeSelector:
-        kubernetes.io/os: linux
-        tbd.io/node-type: platform
-        kubernetes.io/arch: arm64
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

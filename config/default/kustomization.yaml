@@ -10,16 +10,13 @@ namePrefix: identity-operator-
 
 # Labels to add to all resources and selectors.
 commonLabels:
-  app: identity-operator
   app.kubernetes.io/name: identity-operator
-  app.kubernetes.io/instance: manager
-  app.kubernetes.io/component: identity-operator
-  app.kubernetes.io/version: v0.0.1
-  capabilities.tbd.io/capability: identity
-  capabilities.tbd.io/version: v0.0.1
-  capabilities.tbd.io/platform-version: unstable
+  app.kubernetes.io/instance: default
+  app.kubernetes.io/component: controller
+  app.kubernetes.io/version: unstable
   app.kubernetes.io/part-of: platform
-  app.kubernetes.io/managed-by: platform-config-operator
+  capabilities.tbd.io/capability: identity
+  capabilities.tbd.io/platform-version: unstable
 
 bases:
 - ../crd
